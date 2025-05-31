@@ -1,0 +1,19 @@
+# Operating System files
+.DS_Store
+Thumbs.db
+
+# Log files
+*.log
+debug.log*
+
+# Environment variables - if you ever create a .env file locally for non-Netlify things
+.env
+
+# IDE and editor specific files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw? 

@@ -1,0 +1,990 @@
+:root {
+    /* Light Theme Variables */
+    --body-bg: #f4f4f4;
+    --section-bg: #fff;
+    --text-primary: #333;
+    --text-secondary: #555;
+    --header-bg: #333;
+    --header-bg-scrolled: #2a2a2a;
+    --header-text: #fff;
+    --link-color: #007bff;
+    --link-hover-color: #00aeff; /* Existing header nav link hover */
+    --button-bg: #007bff;
+    --button-text: #fff;
+    --button-hover-bg: #0056b3;
+    --border-color: #ccc; /* For general borders like input fields */
+    --card-shadow-color: rgba(0,0,0,0.08);
+    --card-hover-shadow-color: rgba(0,0,0,0.15);
+    --video-item-shadow-color: rgba(0,0,0,0.1);
+    --footer-bg: #222;
+    --footer-text: #ccc;
+    --footer-border-color: #00aeff;
+    --newsletter-bg: #f9f9f9;
+    --newsletter-input-border: #ccc;
+    --newsletter-message-success-text: green;
+    --newsletter-message-error-text: red;
+    --newsletter-message-submitting-text: orange;
+}
+
+body.dark-mode {
+    /* Dark Theme Variables */
+    --body-bg: #121212;
+    --section-bg: #1e1e1e;
+    --text-primary: #e0e0e0;
+    --text-secondary: #b3b3b3;
+    --header-bg: #1f1f1f;
+    --header-bg-scrolled: #1a1a1a; /* Slightly different dark for scrolled header */
+    --header-text: #e0e0e0;
+    --link-color: #64b5f6;
+    --link-hover-color: #90caf9; /* Lighter blue for hover on dark */
+    --button-bg: #007bff; /* Keep primary blue if contrast is good, or adjust */
+    --button-text: #fff;
+    --button-hover-bg: #0056b3; /* Can remain the same or adjust */
+    --border-color: #555; /* Darker borders */
+    --card-shadow-color: rgba(0,0,0,0.4); /* Shadows are trickier in dark mode, often lighter or use outlines */
+    --card-hover-shadow-color: rgba(0,0,0,0.5);
+    --video-item-shadow-color: rgba(0,0,0,0.3);
+    --footer-bg: #1a1a1a;
+    --footer-text: #a0a0a0;
+    --footer-border-color: #64b5f6;
+    --newsletter-bg: #2a2a2a; /* Darker background for newsletter */
+    --newsletter-input-border: #555;
+    --newsletter-message-success-text: #4caf50; /* Brighter green */
+    --newsletter-message-error-text: #f44336; /* Brighter red */
+    --newsletter-message-submitting-text: #ffa726; /* Brighter orange */
+}
+
+/* Styles for the theme toggle button */
+#theme-toggle {
+    background: none;
+    border: none;
+    color: var(--header-text); /* Use header text color */
+    font-size: 1.2rem; /* Adjust as needed */
+    cursor: pointer;
+    padding: 5px;
+    margin-left: 15px; /* Space it from the nav links */
+    line-height: 1; /* To prevent extra height */
+}
+
+#theme-toggle:hover {
+    color: var(--link-hover-color); /* Use link hover color from current theme */
+}
+
+#theme-toggle:focus-visible {
+    outline: 2px solid var(--link-hover-color);
+    outline-offset: 2px;
+    border-radius: 3px; /* Optional: adds a bit of rounding to the outline */
+}
+
+/* Header Search Bar Styles */
+.header-search {
+    display: flex;
+    align-items: center;
+    margin-left: 15px; /* Spacing from nav links or theme toggle if it were on the left */
+}
+
+.header-search input[type="search"] {
+    padding: 6px 10px;
+    font-size: 0.9rem;
+    border: 1px solid var(--border-color);
+    border-radius: 20px 0 0 20px; /* Rounded left corners */
+    background-color: var(--section-bg);
+    color: var(--text-primary);
+    width: 150px; /* Adjust as needed */
+    transition: width 0.3s ease-in-out, border-color 0.3s ease;
+}
+
+.header-search input[type="search"]:focus {
+    width: 200px; /* Expand on focus */
+    border-color: var(--link-color);
+    outline: none;
+}
+
+.header-search button[type="submit"] {
+    padding: 6px 10px;
+    border: 1px solid var(--link-color); /* Match focus color or use a button specific border */
+    background-color: var(--link-color); /* Or use a button background variable */
+    color: var(--button-text);
+    border-radius: 0 20px 20px 0; /* Rounded right corners */
+    cursor: pointer;
+    font-size: 0.9rem; /* Match input field font size */
+    border-left: none; /* Avoid double border with input */
+}
+
+.header-search button[type="submit"]:hover {
+    background-color: var(--link-hover-color); /* Or button hover bg */
+    border-color: var(--link-hover-color);
+}
+
+/* Adjust nav to accommodate search and toggle */
+header nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Pushes items apart if header-content also uses flex for centering */
+    width: 100%; /* Ensure nav takes full width if needed */
+    max-width: 1200px; /* Or your site's max width */
+    padding: 0 20px; /* Add some padding if nav is full width */
+}
+
+header nav ul {
+    /* flex-grow: 1; */ /* Allow ul to take up space if needed, or remove if causing issues */
+    margin-right: auto; /* Push other items (search, toggle) to the right if ul is first */
+}
+
+/* Language Switcher Styles */
+.language-switcher {
+    margin-left: 10px; /* Space from search bar */
+    margin-right: 10px; /* Space to theme toggle */
+    color: var(--header-text); /* Match header text color */
+}
+
+.language-switcher .lang-link {
+    color: var(--header-text); /* Match header text color */
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9rem;
+    padding: 2px 4px;
+    border-radius: 3px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.language-switcher .lang-link.active-lang {
+    background-color: var(--link-color); /* Highlight active language */
+    color: var(--button-text); /* Ensure contrast on active background */
+}
+
+.language-switcher .lang-link:not(.active-lang):hover {
+    color: var(--link-hover-color);
+    background-color: var(--header-bg-scrolled); /* Subtle background on hover for non-active */
+}
+
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth; /* This enables smooth scroll for anchor links by default */
+    scroll-padding-top: 70px; /* Adjust this value to your fixed header's height */
+}
+
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--text-primary);
+    background-color: var(--body-bg); /* Fallback or base color */
+    background-image: url('../images/gnt-tile-background.png');
+    background-repeat: no-repeat; /* Changed from repeat */
+    background-size: cover; /* Ensure it covers the area */
+    background-position: center center; /* Center the image */
+    background-attachment: fixed; /* Keep background fixed on scroll */
+    padding-top: 70px; /* For fixed header */
+}
+
+header {
+    background: var(--header-bg);
+    color: var(--header-text);
+    padding: 1rem 0;
+    /* text-align: center; */ /* Will be handled by flexbox */
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    display: flex; /* Make header a flex container */
+    flex-direction: column; /* Stack header-content and nav vertically */
+    align-items: center; /* Center them horizontally */
+    font-family: 'Montserrat', sans-serif; /* Added Montserrat for header elements */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Add transition for smooth change */
+}
+
+header.header-scrolled {
+    background-color: var(--header-bg-scrolled);
+    box-shadow: 0 2px 5px var(--card-shadow-color); /* Add shadow on scroll */
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center logo and title group */
+    margin-bottom: 0.5rem; /* Space between title group and nav */
+}
+
+#site-logo {
+    height: 50px; /* Adjust as needed */
+    margin-right: 15px; /* Space between logo and title */
+}
+
+header h1 {
+    margin-bottom: 0; /* Reset margin as flex alignment handles it */
+    font-weight: 700; /* Make title bolder */
+}
+
+/* Hero Section Styles */
+#hero {
+    background-image: url('../images/hero-background.jpg'); /* Path relative to css folder */
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    /* color: #fff; Removed as there's no text */
+    padding: 0; /* Removed padding as there's no content to pad */
+    /* text-align: center; Removed as there's no text */
+    min-height: 90vh; /* Make hero section take up a good portion of viewport height. Changed from 70vh to 90vh. */
+    /* display: flex; Removed as no content to flex center */
+    /* flex-direction: column; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* position: relative; No longer needed for overlay */
+}
+
+/* Optional: Add a semi-transparent overlay for better text readability */
+/* #hero::before { */
+/*    content: ''; */
+/*    position: absolute; */
+/*    top: 0; */
+/*    left: 0; */
+/*    right: 0; */
+/*    bottom: 0; */
+/*    background: rgba(0, 0, 0, 0.3); */ /* Dark overlay, reduced opacity from 0.5 to 0.3 */
+/*    z-index: 1; */
+/* } */
+
+#hero .hero-content {
+    /* position: relative; */ /* No longer needed */
+    /* z-index: 2; */
+    /* max-width: 800px; */ /* No longer needed */
+    /* All content inside this div was removed, so styles for h2, p are also effectively removed or can be deleted if desired */
+}
+
+/* Styles for h2, p, and .cta-button inside #hero are no longer applicable as content is removed */
+/* #hero h2 { ... } */
+/* #hero p { ... } */
+/* .cta-button { ... } */
+
+header nav ul {
+    list-style: none;
+}
+
+header nav ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+header nav ul li a {
+    color: var(--header-text);
+    text-decoration: none;
+    font-weight: 400; /* Adjust weight if needed */
+    padding: 5px 0; /* Add some padding for a better hover area if needed */
+    position: relative; /* For the underline pseudo-element */
+    transition: color 0.3s ease; /* Add transition for color change */
+}
+
+header nav ul li a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--link-hover-color);
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+
+header nav ul li a:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+header nav ul li a:hover {
+    /* text-decoration: underline; */ /* Remove default underline if using pseudo-element */
+    color: var(--link-hover-color);
+}
+
+main {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+section {
+    background: var(--section-bg);
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 15px var(--card-shadow-color);
+}
+
+section h2 {
+    margin-bottom: 15px;
+    color: var(--text-primary);
+    font-family: 'Montserrat', sans-serif; /* Changed to Montserrat */
+    font-weight: 700; /* Make section titles bolder */
+}
+
+.video-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.video-gallery .video-item {
+    background: var(--section-bg); /* Was #fff, now uses variable */
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 8px var(--video-item-shadow-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.video-gallery .video-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px var(--card-hover-shadow-color);
+}
+
+.video-thumbnail-container {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 Aspect Ratio (9 / 16 * 100) */
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+    border-radius: 5px; /* Match item radius */
+    overflow: hidden; /* Ensure iframe doesn't overflow radius */
+    margin-bottom: 10px; /* Space between thumbnail and title */
+}
+
+.video-thumbnail-container .play-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 40px; /* Adjust size as needed */
+    color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    line-height: 60px; /* Center the play symbol vertically */
+}
+
+.video-thumbnail-container:hover .play-icon {
+    background-color: rgba(255, 0, 0, 0.8); /* Red on hover, for example */
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* Styles for when the iframe is active inside the thumbnail container */
+.video-thumbnail-container.video-playing {
+    /* padding-top: 56.25%; This might still be needed or might conflict, test */
+}
+
+.video-thumbnail-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 0; /* Override any parent radius if it was on the container */
+}
+
+.video-gallery .video-item h3 {
+    font-size: 1rem;
+    margin-top: 10px;
+    margin-bottom: 10px; /* Add margin below title before share buttons */
+    color: var(--text-primary);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+
+/* Style for video title links in the gallery */
+.video-gallery .video-item h3 a {
+    text-decoration: none; /* Remove underline by default */
+    color: inherit; /* Inherit color from h3 (which is #333) */
+    transition: color 0.3s ease;
+}
+
+.video-gallery .video-item h3 a:hover {
+    color: var(--link-color); /* Change color on hover - e.g., primary blue */
+    text-decoration: underline; /* Add underline on hover */
+}
+
+.social-share {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--border-color); /* Separator line */
+}
+
+.social-share .share-placeholder {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+/* Styles for actual share buttons */
+.social-share-button {
+    color: var(--text-secondary); /* Was #555, using secondary text color */
+    font-size: 1.3rem; /* Icon size for share buttons */
+    margin: 0 8px; /* Space between icons */
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-share-button:hover {
+    transform: scale(1.15); /* Slightly enlarge icon on hover */
+}
+
+/* Specific hover colors for branding for share buttons */
+/* .social-share-button i.fa-facebook-f:hover { */
+/*    color: #1877F2; */ /* Facebook Blue - REMOVED */
+/* } */
+.social-share-button i.fa-x-twitter:hover {
+    color: #000000; /* X Black */
+}
+/* .social-share-button i.fa-whatsapp:hover { */
+/*    color: #25D366; */ /* WhatsApp Green - REMOVED */
+/* } */
+/* .social-share-button i.fa-envelope:hover { */
+/*    color: #777; */ /* Email Grey - REMOVED */
+/* } */
+
+/* #community ul { */ /* Commenting out old list style if it conflicts */
+/*    list-style: none; */
+/*    padding-left: 0; */
+/* } */
+
+/* #community ul li { */ /* Commenting out old list item style */
+/*    margin-bottom: 10px; */
+/* } */
+
+/* #community ul li a { */ /* Commenting out old link style */
+/*    text-decoration: none; */
+/*    color: #007bff; */
+/* } */
+
+/* #community ul li a:hover { */
+/*    text-decoration: underline; */
+/* } */
+
+.social-icons-list {
+    list-style: none;
+    padding-left: 0;
+    display: flex; /* Arrange icons in a row */
+    justify-content: center; /* Center the icons */
+    gap: 20px; /* Space between icons */
+    margin-top: 15px;
+}
+
+.social-icons-list li a {
+    color: var(--text-primary); /* Was #333 */
+    font-size: 1.5rem; /* Adjusted Icon size to better match text */
+    transition: color 0.3s ease, transform 0.3s ease;
+    display: flex; /* Align icon and text */
+    align-items: center; /* Vertically align icon and text */
+    text-decoration: none; /* Remove underline from link if any */
+}
+
+.social-icons-list li a .social-title {
+    font-size: 1rem; /* Text size for the title */
+    margin-left: 8px; /* Space between icon and text */
+    font-family: 'Roboto', sans-serif; /* Consistent font */
+    font-weight: 500;
+}
+
+.social-icons-list li a:hover {
+    color: var(--link-color); /* Change color on hover - e.g., primary blue */
+    transform: scale(1.1); /* Slightly enlarge icon on hover */
+}
+
+/* Specific hover colors for branding (optional) */
+.social-icons-list li a[aria-label="YouTube"]:hover {
+    color: #FF0000; /* YouTube Red */
+}
+/* .social-icons-list li a[aria-label="Facebook"]:hover { */
+/*    color: #1877F2; */ /* Facebook Blue - REMOVED */
+/* } */
+.social-icons-list li a[aria-label="X"]:hover {
+    color: #000000; /* X Black */
+}
+/* .social-icons-list li a[aria-label="Instagram"]:hover { */
+/*    color: #E4405F; */ /* Instagram Pink - REMOVED */
+/* } */
+.social-icons-list li a[aria-label="TikTok"]:hover {
+    color: #000000; /* TikTok Black (can also use #FE2C55 for pink or #25F4EE for blue) */
+}
+
+footer {
+    text-align: center;
+    padding: 30px 20px; /* Increased padding */
+    background: var(--footer-bg); /* Slightly lighter than header for differentiation */
+    color: var(--footer-text); /* Lighter text color for dark background */
+    margin-top: 30px;
+    border-top: 3px solid var(--footer-border-color); /* Accent color top border */
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column; /* Stack copyright and social links on small screens */
+    align-items: center;
+}
+
+.social-links-footer {
+    margin-top: 15px;
+}
+
+.social-links-footer a {
+    color: var(--footer-text);
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.social-links-footer a:hover {
+    color: var(--link-hover-color); /* Accent color on hover */
+    text-decoration: underline;
+}
+
+/* Responsive adjustments for footer if needed */
+@media (min-width: 768px) {
+    .footer-content {
+        flex-direction: row; /* Side-by-side on larger screens */
+        justify-content: space-between;
+    }
+    .social-links-footer {
+        margin-top: 0;
+    }
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: var(--button-bg); /* A common call-to-action blue */
+    color: var(--button-text);
+    padding: 12px 25px;
+    text-decoration: none;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif; /* Added Montserrat for CTA button */
+}
+
+/* Back to Top Button */
+#back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--button-bg); /* Same as CTA button for consistency */
+    color: var(--button-text);
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px; /* Vertically center the arrow */
+    font-size: 24px; /* Size of the arrow */
+    border-radius: 50%;
+    text-decoration: none;
+    z-index: 1000;
+    opacity: 0; /* Hidden by default */
+    visibility: hidden; /* Hidden by default */
+    transition: opacity 0.3s ease, visibility 0.3s ease, background-color 0.3s ease;
+}
+
+#back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+#back-to-top:hover {
+    background-color: var(--button-hover-bg); /* Darker on hover, matches CTA */
+}
+
+/* Newsletter Section */
+#newsletter {
+    background-color: var(--newsletter-bg); /* Light grey background */
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.newsletter-content h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: var(--text-primary);
+}
+
+.newsletter-content p {
+    margin-bottom: 20px;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+}
+
+#newsletter-form {
+    display: flex;
+    flex-direction: column; /* Stack on small screens */
+    align-items: center;
+    justify-content: center;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+#newsletter-form input[type="email"] {
+    padding: 12px 15px;
+    font-size: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    margin-bottom: 10px; /* Space between input and button on small screens */
+    width: 100%; /* Full width on small screens */
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* For focus effect */
+    color: var(--text-primary);
+    background-color: var(--section-bg); /* Or specific input background */
+}
+
+#newsletter-form input[type="email"]:focus {
+    border-color: var(--link-color); /* Use theme link color for focus */
+    box-shadow: 0 0 0 0.2rem var(--link-color-transparent, rgba(0, 123, 255, 0.25)); /* Need a transparent version of link color */
+    /* A more robust way for box-shadow color: 
+       box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--link-color) 25%, transparent); 
+       but color-mix is very new. Sticking to rgba for now or define --link-color-transparent. */
+}
+
+/* Placeholder text color needs to be handled too */
+#newsletter-form input[type="email"]::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.7;
+}
+
+/* Container for the consent checkbox and its text */
+.consent-group {
+    display: flex;
+    align-items: flex-start; 
+    margin-top: 10px;
+    margin-bottom: 15px; 
+    text-align: left;
+    max-width: 450px; 
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.consent-group input[type="checkbox"] {
+    margin-right: 8px;
+    margin-top: 3px; 
+    flex-shrink: 0; 
+}
+
+.consent-group label { 
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+#newsletter-form button[type="submit"] {
+    /* Uses .cta-button styles already defined, can add overrides here if needed */
+    width: 100%; /* Full width on small screens */
+}
+
+#newsletter-message {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    min-height: 1.2em; /* Reserve space for the message */
+}
+
+/* Responsive adjustments for newsletter form */
+@media (min-width: 768px) {
+    #newsletter-form {
+        flex-direction: row; /* Side-by-side on larger screens */
+    }
+    #newsletter-form input[type="email"] {
+        margin-bottom: 0;
+        margin-right: 10px; /* Space between input and button */
+        width: auto; /* Auto width based on content and flex */
+        flex-grow: 1; /* Allow input to grow */
+    }
+    /* Ensure label and consent group work well in flex row if needed */
+    #newsletter-form label[for="email-input-newsletter"] {
+        /* Adjust if form elements are in a row now */
+        /* max-width might not be needed here if the input itself grows */
+    }
+    .consent-group {
+        /* This may need to be adjusted if it is to sit beside the input or button 
+           in a row layout on larger screens. For now, assumes it stacks before button.*/
+        width: 100%; /* Ensure it spans if the form becomes a row above it */
+        margin-bottom: 10px; /* Add back some bottom margin before button */
+    }
+    #newsletter-form button[type="submit"] {
+        width: auto; /* Auto width for button */
+    }
+}
+
+/* Animation for sections on scroll */
+main > section,
+#contact,
+#newsletter {
+    opacity: 0; /* Start hidden */
+    transform: translateY(30px); /* Start slightly lower */
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+main > section.visible-section,
+#contact.visible-section,
+#newsletter.visible-section {
+    opacity: 1; /* Fade in */
+    transform: translateY(0); /* Move to original position */
+}
+
+/* Featured Video Section */
+#featured-video {
+    background-color: var(--section-bg); /* Match other sections */
+    padding: 20px;
+    margin-bottom: 30px; /* Space before video gallery */
+    border-radius: 8px;
+    box-shadow: 0 2px 15px var(--card-shadow-color);
+}
+
+.featured-video-item {
+    display: flex;
+    flex-direction: column; /* Stack on small screens */
+    gap: 20px;
+}
+
+.featured-thumbnail-container {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 Aspect Ratio */
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+    border-radius: 8px; /* Slightly more rounded for featured look */
+    overflow: hidden;
+}
+
+/* Re-use play-icon styles from video-gallery or define specific if needed */
+.featured-thumbnail-container .play-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 60px; /* Larger play icon for featured video */
+    color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    line-height: 90px;
+}
+
+.featured-thumbnail-container:hover .play-icon {
+    background-color: rgba(255, 0, 0, 0.8);
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+.featured-thumbnail-container.video-playing {
+    /* Styles if needed when video is playing */
+}
+
+.featured-thumbnail-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.featured-text-content h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.8rem; /* Prominent title */
+    color: var(--text-primary);
+    margin-bottom: 10px;
+}
+
+.featured-text-content p {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+}
+
+/* Responsive layout for featured video */
+@media (min-width: 768px) {
+    .featured-video-item {
+        flex-direction: row; /* Side-by-side on larger screens */
+    }
+    .featured-thumbnail-container {
+        flex-basis: 60%; /* Thumbnail takes more space */
+        padding-top: 33.75%; /* Adjust aspect ratio for wider container: 9 / 16 * 60% width = 33.75% */
+
+    }
+    .featured-text-content {
+        flex-basis: 40%;
+    }
+}
+
+#community ul {
+    // ... existing code ...
+}
+
+/* Contact Section */
+#contact {
+    background-color: var(--section-bg); /* Or a slightly different shade if preferred */
+    padding: 40px 20px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 2px 15px var(--card-shadow-color);
+    margin-bottom: 20px; /* Consistent with other sections */
+}
+
+#contact h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 2rem;
+    margin-bottom: 15px;
+    color: var(--text-primary);
+}
+
+#contact p {
+    margin-bottom: 15px;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+.contact-email {
+    color: var(--link-color); /* Primary link color */
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.contact-email:hover {
+    text-decoration: underline;
+    color: var(--link-hover-color);
+}
+
+/* Animations for content sections (original, ensure this is not duplicated) */
+/* Make sure this only appears once after all specific page/component styles */
+.content-section {
+    padding: 5px 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, bottom 0.3s ease-in-out;
+}
+
+#back-to-top.show {
+    opacity: 1;
+    bottom: 20px;
+}
+
+/* Styles for About Page */
+.about-container {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: var(--section-bg);
+    border-radius: 8px;
+    box-shadow: 0 2px 15px var(--card-shadow-color);
+}
+.about-container h1 {
+    color: var(--text-primary);
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.about-container h2 {
+    color: var(--text-primary);
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+.about-container p {
+    line-height: 1.7;
+    margin-bottom: 15px;
+    color: var(--text-secondary);
+}
+.team-members {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+.team-member {
+    background-color: var(--newsletter-bg);
+    padding: 15px;
+    border-radius: 5px;
+    text-align: center;
+    width: calc(33.333% - 20px); /* Adjust for responsiveness */
+    min-width: 200px;
+}
+.team-member img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    object-fit: cover;
+}
+
+/* Ensure CTA button has a clear hover state */
+.cta-button:hover {
+    background-color: var(--button-hover-bg); /* Darker blue, consistent with back-to-top */
+    color: var(--button-text); /* Ensure text color remains white or light */
+}
+
+/* Loading Spinner Styles */
+.loader {
+    border: 5px solid var(--body-bg); /* Light grey for the track */
+    border-top: 5px solid var(--link-color); /* Blue for the spinner */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto; /* Center the loader */
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Ensure sections that will contain loaders can center them - REVERTING THIS PART */
+/*
+#featured-video,
+.video-gallery {
+    display: flex;
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    min-height: 150px; 
+}
+*/
+
+/* Animations for sections on scroll */
+main > section,
+#contact,
+#newsletter {
+    opacity: 0; /* Start hidden */
+    transform: translateY(30px); /* Start slightly lower */
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+main > section.visible-section,
+#contact.visible-section,
+#newsletter.visible-section {
+    opacity: 1; /* Fade in */
+    transform: translateY(0); /* Move to original position */
+}
