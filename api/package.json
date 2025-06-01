@@ -1,0 +1,9 @@
+{
+  "name": "global-news-thailand-api",
+  "version": "1.0.0",
+  "description": "Serverless function for GNT website",
+  "main": "getYoutubeVideos.js",
+  "dependencies": {
+    "node-fetch": "^2.6.1" 
+  }
+} 

@@ -16,4 +16,11 @@ debug.log*
 *.ntvs*
 *.njsproj
 *.sln
-*.sw? 
+*.sw?
+
+# Node dependencies
+/node_modules/
+api/node_modules/
+
+# Vercel directory
+.vercel/ 
