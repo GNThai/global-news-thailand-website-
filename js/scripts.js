@@ -34,8 +34,8 @@ async function fetchVideos() {
     if (featuredVideoSection) featuredVideoSection.innerHTML = loaderHTML;
 
     try {
-        // Call the serverless function - UPDATED PATH FOR VERCEL
-        const serverlessFunctionUrl = `/api/getYoutubeVideos?channelId=${CHANNEL_ID}&count=${TOTAL_VIDEOS_TO_FETCH}`;
+        // Call the serverless function - UPDATED PATH FOR NETLIFY
+        const serverlessFunctionUrl = `/.netlify/functions/getYoutubeVideos?channelId=${CHANNEL_ID}&count=${TOTAL_VIDEOS_TO_FETCH}`;
         const response = await fetch(serverlessFunctionUrl);
 
         if (!response.ok) {
