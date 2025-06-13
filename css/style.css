@@ -875,116 +875,72 @@ main > section.visible-section,
 
 .contact-email:hover {
     text-decoration: underline;
-    color: var(--link-hover-color);
 }
 
 /* Animations for content sections (original, ensure this is not duplicated) */
 /* Make sure this only appears once after all specific page/component styles */
 .content-section {
-    padding: 5px 10px;
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out, bottom 0.3s ease-in-out;
+    padding: 60px 20px;
+    border-bottom: 1px solid #eee;
+    text-align: center;
+}
+
+/* Specific styling for the social icons in the community section */
+.social-icons {
+    padding-top: 20px;
+}
+
+.social-icons .social-icon {
+    font-size: 2.5rem; /* Larger icons for the main community section */
+    margin: 0 20px;
+    color: var(--text-primary);
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-icons .social-icon:hover {
+    transform: translateY(-5px); /* Add a subtle lift effect on hover */
+}
+
+/* Styling for footer social icons */
+.footer-social-icons {
+    padding-top: 10px;
+}
+
+.footer-social-icons a {
+    color: var(--footer-text);
+    margin: 0 15px;
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+/* General hover for footer icons, can be a subtle color change */
+.footer-social-icons a:hover {
+    color: var(--link-hover-color);
+}
+
+/* Keeping specific brand hover colors, which will override the general hover color */
+.social-icons .fa-youtube:hover, .footer-social-icons .fa-youtube:hover {
+    color: #FF0000;
+}
+
+.social-icons .fa-x-twitter:hover, .footer-social-icons .fa-x-twitter:hover {
+    color: #000; /* Black for X logo */
+}
+
+/* In dark mode, you might want a different color for the X logo hover */
+body.dark-mode .social-icons .fa-x-twitter:hover,
+body.dark-mode .footer-social-icons .fa-x-twitter:hover {
+    color: #fff; /* White for X logo in dark mode */
+}
+
+.social-icons .fa-tiktok:hover, .footer-social-icons .fa-tiktok:hover {
+    color: #00f2ea; /* A common color for TikTok */
 }
 
 #back-to-top.show {
     opacity: 1;
-    bottom: 20px;
+    visibility: visible;
 }
 
-/* Styles for About Page */
-.about-container {
-    max-width: 900px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: var(--section-bg);
-    border-radius: 8px;
-    box-shadow: 0 2px 15px var(--card-shadow-color);
-}
-.about-container h1 {
-    color: var(--text-primary);
-    font-family: 'Montserrat', sans-serif;
-    text-align: center;
-    margin-bottom: 20px;
-}
-.about-container h2 {
-    color: var(--text-primary);
-    font-family: 'Montserrat', sans-serif;
-    margin-top: 30px;
-    margin-bottom: 10px;
-}
-.about-container p {
-    line-height: 1.7;
-    margin-bottom: 15px;
-    color: var(--text-secondary);
-}
-.team-members {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-}
-.team-member {
-    background-color: var(--newsletter-bg);
-    padding: 15px;
-    border-radius: 5px;
-    text-align: center;
-    width: calc(33.333% - 20px); /* Adjust for responsiveness */
-    min-width: 200px;
-}
-.team-member img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    margin-bottom: 10px;
-    object-fit: cover;
-}
-
-/* Ensure CTA button has a clear hover state */
-.cta-button:hover {
-    background-color: var(--button-hover-bg); /* Darker blue, consistent with back-to-top */
-    color: var(--button-text); /* Ensure text color remains white or light */
-}
-
-/* Loading Spinner Styles */
-.loader {
-    border: 5px solid var(--body-bg); /* Light grey for the track */
-    border-top: 5px solid var(--link-color); /* Blue for the spinner */
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    animation: spin 1s linear infinite;
-    margin: 20px auto; /* Center the loader */
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* Ensure sections that will contain loaders can center them - REVERTING THIS PART */
-/*
-#featured-video,
-.video-gallery {
-    display: flex;
-    flex-direction: column; 
-    justify-content: center; 
-    align-items: center; 
-    min-height: 150px; 
-}
-*/
-
-/* Animations for sections on scroll */
-main > section,
-#contact,
-#newsletter {
-    opacity: 0; /* Start hidden */
-    transform: translateY(30px); /* Start slightly lower */
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-main > section.visible-section,
-#contact.visible-section,
-#newsletter.visible-section {
-    opacity: 1; /* Fade in */
-    transform: translateY(0); /* Move to original position */
-}
+/* About Us Section Specifics */
+/* ... existing code ... */
